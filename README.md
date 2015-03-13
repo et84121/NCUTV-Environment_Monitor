@@ -9,3 +9,6 @@
 
 未來想加入[光敏電阻]探測是否有人進入(因為人進來這個房間一定會開日光燈)
 
+用到的函式庫  
+[arduino-DHT](https://github.com/markruys/arduino-DHT)DHT22的lib  
+[ITEADLIB_Arduino_WeeESP8266](https://github.com/itead/ITEADLIB_Arduino_WeeESP8266)WIFI的lib  
