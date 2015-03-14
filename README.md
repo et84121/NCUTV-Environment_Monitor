@@ -12,3 +12,5 @@
 用到的函式庫  
 [arduino-DHT](https://github.com/markruys/arduino-DHT) DHT22的lib  
 [ITEADLIB_Arduino_WeeESP8266](https://github.com/itead/ITEADLIB_Arduino_WeeESP8266) WIFI的lib  
+
+![偵測儀](http://i.imgur.com/MDFwpPs.jpg)
