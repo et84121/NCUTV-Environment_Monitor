@@ -9,7 +9,7 @@
 ESP8266 wifi(Serial1);
 DHT dht;
 
-uint8_t dhtbuf[2];  //TEMP and HUM 's buffer
+int dhtbuf[2];  //TEMP and HUM 's buffer
 void setup(void)
 {
     Serial.begin(9600);
@@ -52,17 +52,20 @@ void loop(void)
     } else {
         Serial.print("create tcp err\r\n");
     }
-        dhtbuf[0] = dht.getHumidity();
-        dhtbuf[1] = dht.getTemperature();
-        
-        char buf[3];
+        dhtbuf[0] = dht.getHumidity()*10;
+        dhtbuf[1] = dht.getTemperature()*10;
+        char buf[5];
         String HH, TT;
-        buf[0] = 0x30 + dhtbuf[1] / 10;
-        buf[1] = 0x30 + dhtbuf[1] % 10;
-        TT = (String(buf)).substring( 0, 2 );
-        buf[0] = 0x30 + dhtbuf[0] / 10;
-        buf[1] = 0x30 + dhtbuf[0] % 10;
-        HH = (String(buf)).substring( 0, 2 );
+        buf[0] = 48 + dhtbuf[1] / 100;
+        buf[1] = 48 + (dhtbuf[1]-(dhtbuf[1]/100)*100) / 10;
+        buf[3] = 48 + dhtbuf[1] % 10 ;
+        buf[2] = 46;
+        TT = (String(buf)).substring( 0, 4 );
+        buf[0] = 0x30 + dhtbuf[0] / 100;
+        buf[1] = 0x30 + (dhtbuf[1]-(dhtbuf[1]/100)*100) / 10;
+        buf[3] = 0x30 + dhtbuf[0] % 10;
+        buf[2] = 46;
+        HH = (String(buf)).substring( 0, 4 );
         
     String hello ;
     hello = "GET /update?key=PT2AWDSC8R7MI4IW&field1=" + HH + "&field2=" + TT + "\r\n";
