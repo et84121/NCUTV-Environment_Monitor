@@ -9,10 +9,11 @@
 ESP8266 wifi(Serial1);
 DHT dht;
 
-unsigned long run_time;
+//unsigned long run_time;
 int dhtbuf[2];  //TEMP and HUM 's buffer
 void setup(void)
-{
+{    
+    pinMode(8,OUTPUT);
     Serial.begin(9600);
     Serial.print("setup begin\r\n");
     
@@ -44,11 +45,11 @@ void setup(void)
     Serial.print("setup end\r\n");
 }
 
-void(* resetFunc) (void) = 0;
+//void(* resetFunc) (void) = 0;
  
 void loop(void)
 {
-    if(millis()==599990) {   resetFunc();} //call reset 
+    if(millis()==6000) {digitalWrite(8,HIGH);} //call reset 
     uint8_t buffer[128] = {0};  
     
     if (wifi.createTCP(HOST_NAME, HOST_PORT)) {
