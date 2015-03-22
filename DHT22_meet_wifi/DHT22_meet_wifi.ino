@@ -13,7 +13,9 @@ DHT dht;
 int dhtbuf[2];  //TEMP and HUM 's buffer
 void setup(void)
 {    
-    pinMode(8,OUTPUT);
+   digitalWrite(8,HIGH);
+   pinMode(8,OUTPUT);
+    
     Serial.begin(9600);
     Serial.print("setup begin\r\n");
     
@@ -49,7 +51,7 @@ void setup(void)
  
 void loop(void)
 {
-    if(millis()==6000) {digitalWrite(8,HIGH);} //call reset 
+    if(millis()>=360000) {digitalWrite(8,LOW);} //call reset 
     uint8_t buffer[128] = {0};  
     
     if (wifi.createTCP(HOST_NAME, HOST_PORT)) {
